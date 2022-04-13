@@ -18,7 +18,6 @@ def test_dft(epsilon=0.5):
         poly = random_poly(deg)
         distance = d(dft(poly), np.fft.fft(poly))
         assert distance < epsilon, f'deg={deg}; distance={distance}'
-    
     return
 
 
@@ -29,7 +28,6 @@ def test_fft(epsilon=0.5):
         
         distance = d(dft(poly), fft(poly))
         assert distance < epsilon, f'deg={deg}; distance={distance}'
-    
     return
 
 
@@ -37,4 +35,3 @@ if __name__ == '__main__':
     test_fft()
     test_dft()
     print('success!')
-
