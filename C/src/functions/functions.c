@@ -1,5 +1,7 @@
 #include "functions.h"
 
+uint64_t FACTORIAL[21] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 6227020800, 87178291200ul, 1307674368000ul, 20922789888000ul, 355687428096000ul, 6402373705728000ul, 121645100408832000ul, 2432902008176640000ul};
+
 float pow_f32(float base, uint64_t exp)
 {
     if (exp == 0)
@@ -51,9 +53,7 @@ int64_t pow_i64(int64_t base, uint64_t exp)
 cf32 pow_cf32(cf32 base, uint64_t exp)
 {
     if (exp == 0) {
-        cf32 zero;
-        zero.im = 0;
-        zero.re = 0;
+        cf32 zero = { .re = 0, .im = 0 };
         return zero;
     }
     if (exp % 2 == 0) {
@@ -66,9 +66,7 @@ cf32 pow_cf32(cf32 base, uint64_t exp)
 cf64 pow_cf64(cf64 base, uint64_t exp)
 {
     if (exp == 0) {
-        cf64 zero;
-        zero.im = 0;
-        zero.re = 0;
+        cf64 zero = { .re = 0, .im = 0 };
         return zero;
     }
     if (exp % 2 == 0) {
@@ -80,7 +78,6 @@ cf64 pow_cf64(cf64 base, uint64_t exp)
 
 double cos_f64(double x)
 {
-    uint64_t FACTORIAL[21] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 6227020800, 87178291200ul, 1307674368000ul, 20922789888000ul, 355687428096000ul, 6402373705728000ul, 121645100408832000ul, 2432902008176640000ul};
     double result = 1;
     int8_t sign = -1;
         
@@ -93,7 +90,6 @@ double cos_f64(double x)
 
 double sin_f64(double x)
 {
-    uint64_t FACTORIAL[21] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 6227020800, 87178291200ul, 1307674368000ul, 20922789888000ul, 355687428096000ul, 6402373705728000ul, 121645100408832000ul, 2432902008176640000ul};
     double result = x;
     int8_t sign = -1;
 
@@ -106,7 +102,6 @@ double sin_f64(double x)
 
 double exp_f64(double x)
 {
-    uint64_t FACTORIAL[21] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 6227020800, 87178291200ul, 1307674368000ul, 20922789888000ul, 355687428096000ul, 6402373705728000ul, 121645100408832000ul, 2432902008176640000ul};
     double result = 1 + x;
     for (uint8_t n = 2; n < 21; ++n)
         result += pow_f64(x, n) / FACTORIAL[n];
@@ -121,8 +116,9 @@ cf64 exp_cf64(cf64 z)
     double cos = cos_f64(z.im);
     double sin = sin_f64(z.im);
 
-    cf64 exp;
-    exp.re = r * cos;
-    exp.im = r * sin;
+    cf64 exp = {
+        .re = r * cos,
+        .im = r * sin
+    };
     return exp;
 }

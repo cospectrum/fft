@@ -7,7 +7,7 @@
 #endif
 
 typedef struct {
-    float* coeffs;
+    double* coeffs;
     size_t len;
 } poly_f64;
 

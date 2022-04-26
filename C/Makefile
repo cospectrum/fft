@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 PROGRAM = fft
 VERSION = 0.1.0
 
@@ -20,6 +20,9 @@ PS_O = poly_cf64.o
 DFT = src/dft/dft_
 DFTS = $(DFT)cf64.c
 DFTS_O = dft_cf64.o
+
+ALL_O = $(PS_O) $(F_O) $(IMS_O) $(DFTS_O)
+
 
 all: dft.o
 
@@ -50,6 +53,5 @@ poly.o: imaginary.o
 dft.o: imaginary.o
 	$(CC) -c $(DFTS) $(PS) $(F)
 
-main.c: dft.o
-	$(CC) main.c $(PS_O) $(F_O) $(IMS_O) $(DFTS_O)
-
+libfft.a: all
+	ar rcs libfft.a $(ALL_O)
