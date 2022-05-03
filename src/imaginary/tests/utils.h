@@ -16,7 +16,7 @@
 #include <stdio.h>
 #endif
 
-#define eq(lhs, rhs) (lhs.re == rhs.re && lhs.im == rhs.im)
+#define eq(lhs, rhs) ((lhs.re == rhs.re) && (lhs.im == rhs.im))
 
 //! return random number in [min, max]
 #define random(min, max) min + (rand() / RAND_MAX)*(max - min)

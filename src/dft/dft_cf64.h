@@ -5,6 +5,7 @@
 #include "../poly/poly_cf64.h"
 #include "../functions/functions.h"
 
-poly_cf64 dft_cf64(poly_cf64 p);
+void dft_cf64(struct poly_cf64 p, struct poly_cf64* result);
+void idft_cf64(struct poly_cf64 p, struct poly_cf64* result);
 
 #endif

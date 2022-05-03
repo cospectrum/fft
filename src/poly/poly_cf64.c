@@ -1,10 +1,10 @@
-#include "poly_f64.h"
+#include "poly_cf64.h"
 
-poly_f64 add_poly_f64(poly_f64 lhs, poly_f64 rhs)
+void add_poly_cf64(struct poly_cf64 lhs, struct poly_cf64 rhs, struct poly_cf64* result)
 {
     size_t max_len;
     size_t min_len;
-    poly_f64* max_poly;
+    struct poly_cf64* max_poly;
 
     if (lhs.len > rhs.len) {
         max_len = lhs.len;
@@ -16,16 +16,12 @@ poly_f64 add_poly_f64(poly_f64 lhs, poly_f64 rhs)
         max_poly = &rhs;
     }
 
-    poly_f64 p;
-    p.len = max_len;
-    p.coeffs = malloc(max_len * sizeof(double));
-
     for (size_t i = 0; i < min_len; ++i) 
-        p.coeffs[i] = lhs.coeffs[i] + rhs.coeffs[i];
+        result->coeffs[i] = add_cf64(lhs.coeffs[i], rhs.coeffs[i]);
 
     for (size_t i = min_len; i < max_len; ++i)
-        p.coeffs[i] = max_poly->coeffs[i];
-    
-    return p;
+        result->coeffs[i] = max_poly->coeffs[i];
+
+    result->len = max_len;
 }
 
